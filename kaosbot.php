@@ -5,6 +5,9 @@
 
 require_once 'XMPPHP/XMPP.php';
 require_once 'config/config.php';
+require_once 'core/eventhandler.php';
+
+require_once 'modules/simple.php';
 
 
 #Use XMPPHP_Log::LEVEL_VERBOSE to get more logging for error reports
@@ -13,33 +16,23 @@ $conn = new XMPPHP_XMPP($hostname, $port, $user, $password, $resource, $hostname
 $conn->autoSubscribe();
 
 try {
-    $conn->connect();
-    while(!$conn->isDisconnected()) {
-    	$payloads = $conn->processUntil(array('message', 'presence', 'end_stream', 'session_start'));
-    	foreach($payloads as $event) {
-    		$pl = $event[1];
-    		switch($event[0]) {
-    			case 'message': 
-    				print "---------------------------------------------------------------------------------\n";
-    				print "Message from: {$pl['from']}\n";
-    				if($pl['subject']) print "Subject: {$pl['subject']}\n";
-    				print $pl['body'] . "\n";
-    				print "---------------------------------------------------------------------------------\n";
-    				$conn->message($pl['from'], $body="Thanks for sending me \"{$pl['body']}\".", $type=$pl['type']);
-    				if($pl['body'] == 'quit') $conn->disconnect();
-    				if($pl['body'] == 'break') $conn->send("</end>");
-    			break;
-    			case 'presence':
-    				print "Presence: {$pl['from']} [{$pl['show']}] {$pl['status']}\n";
-    			break;
-    			case 'session_start':
-    			    print "Session Start\n";
-			    	$conn->getRoster();
-    				$conn->presence($status="Cheese!");
-    			break;
-    		}
-    	}
+  $conn->connect();
+  while(!$conn->isDisconnected()) {
+    $payloads = $conn->processUntil(array('message', 'presence', 'end_stream', 'session_start'));
+    foreach($payloads as $event) {
+      $pl = $event[1];
+      switch($event[0]) {
+      case 'session_start':
+	print "Session Start\n";
+	$conn->getRoster();
+	$conn->presence($status="Cheese!");
+	break;
+      default:
+	$eventhandler->processEvents($conn, $event);
+	break;
+      }
     }
+  }
 } catch(XMPPHP_Exception $e) {
-    die($e->getMessage());
-}
+  die($e->getMessage());
+  }
