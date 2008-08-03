@@ -9,7 +9,7 @@ require_once 'config/config.php';
 
 #Use XMPPHP_Log::LEVEL_VERBOSE to get more logging for error reports
 #If this doesn't work, are you running 64-bit PHP with < 5.2.6?
-$conn = new XMPPHP_XMPP($server, $port, $user, $password, $resource, $server, $printlog=true, $loglevel=XMPPHP_Log::LEVEL_INFO);
+$conn = new XMPPHP_XMPP($hostname, $port, $user, $password, $resource, $hostname, $printlog=true, $loglevel=XMPPHP_Log::LEVEL_INFO);
 $conn->autoSubscribe();
 
 try {
