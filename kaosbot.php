@@ -3,11 +3,13 @@
 // activate full error reporting
 //error_reporting(E_ALL & E_STRICT);
 
-include 'XMPPHP/XMPP.php';
+require_once 'XMPPHP/XMPP.php';
+require_once 'config/config.php';
+
 
 #Use XMPPHP_Log::LEVEL_VERBOSE to get more logging for error reports
 #If this doesn't work, are you running 64-bit PHP with < 5.2.6?
-$conn = new XMPPHP_XMPP('kaoskinder.de', 5222, 'kaosbot', 'wyx?M|W>m8WnRg&$a5arE9jb#s5VqG{G8aIorQ3XD!', 'kaosbot', 'kaoskinder.de', $printlog=true, $loglevel=XMPPHP_Log::LEVEL_INFO);
+$conn = new XMPPHP_XMPP($server, $port, $user, $password, $resource, $server, $printlog=true, $loglevel=XMPPHP_Log::LEVEL_INFO);
 $conn->autoSubscribe();
 
 try {
