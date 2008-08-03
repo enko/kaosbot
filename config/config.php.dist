@@ -1,0 +1,40 @@
+<?php
+
+/**
+* File for the Configuration
+*
+* In this file all configuration is stored
+*
+*/
+
+// $conn = new XMPPHP_XMPP('kaoskinder.de', 5222, 'kaosbot', 'wyx?M|W>m8WnRg&$a5arE9jb#s5VqG{G8aIorQ3XD!', 'kaosbot', 'kaoskinder.de', $printlog=true, $loglevel=XMPPHP_Log::LEVEL_INFO);
+  // 	public function __construct($host, $port, $user, $password, $resource, $server = null, $printlog = false, $loglevel = null) {
+
+
+/** 
+ * The hostname to connect to.
+ */
+$hostname = "";
+
+/**
+ * The connection port.
+ */
+$port = 5222;
+
+/**
+ * The username under which the bot connects.
+ */
+$user = "";
+
+/**
+ * The password used to connect.
+ */
+$password = "";
+
+/**
+ * The resource of the bot.
+ */
+
+$resource = uniqid(true);
+
+
