@@ -7,6 +7,14 @@
 *
 */
 
+define('KAOSBOT_BASEDIR','/home/bot/src');
+
+define('DATABASE_FILE', KAOSBOT_BASEDIR . '/db/kaosbot.db');
+
+define('DSN', 'sqlite:///' . DATABASE_FILE);
+
+$database = MDB2::singleton(DSN);
+
 /** 
  * @var string The hostname to connect to.
  */
@@ -32,5 +40,3 @@ $password = '';
  */
 
 $resource = uniqid(true);
-
-
