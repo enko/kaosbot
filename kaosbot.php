@@ -20,17 +20,7 @@ try {
   while(!$conn->isDisconnected()) {
     $payloads = $conn->processUntil(array('message', 'presence', 'end_stream', 'session_start'));
     foreach($payloads as $event) {
-      $pl = $event[1];
-      switch($event[0]) {
-      case 'session_start':
-	print "Session Start\n";
-	$conn->getRoster();
-	$conn->presence($status="Cheese!");
-	break;
-      default:
-	$eventhandler->processEvents($conn, $event);
-	break;
-      }
+      $eventhandler->processEvents($conn, $event);
     }
   }
 } catch(XMPPHP_Exception $e) {
