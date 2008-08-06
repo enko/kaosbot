@@ -4,8 +4,8 @@ require_once(KAOSBOT_BASEDIR . "/core/misc.php");
 
   // administers all event types and event functions
 
-class EventHandler {
-
+class EventHandler
+{
   /**
    * @var array Elements of this array should look like this ("eventtype" => function)
    */
@@ -23,7 +23,6 @@ class EventHandler {
   }
 
   public function processEvents($conn, $payload) {
-    print_r($payload);
     foreach ($this->eventFunctions as $type => $function ) {
       if ($payload[0] == $type) {
 	$function($conn, $payload);
@@ -32,6 +31,6 @@ class EventHandler {
 
   }
 
-  } 
+} 
 
 $eventhandler = Singleton::getInstance('EventHandler');
