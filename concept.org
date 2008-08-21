@@ -1,0 +1,58 @@
+* Ideas about Kaosbot
+** Entities
+All Entities have a common set of fields, so they are listed here and not in every field:
+*** id (primary key)
+*** update_date
+*** insert_date
+** Modules
+*** Users
+**** Entities
+***** User
+****** JID
+****** Permissions (-> Foreign Key)
+****** Last Available
+****** Last Spoke
+****** Online
+**** Events
+***** Presence
+***** Message
+To 
+*** Permissions
+**** Entities
+***** Permission
+****** Name
+**** Events
+*** RSS
+Enables the user the oportunity to subscribe to a given feed.
+**** Entities
+***** Feeds
+****** url
+****** Description
+***** Feeditems
+****** feed -> (foreign key)
+****** hash
+****** title
+****** text
+****** date
+***** Feedsubscriptions
+****** Feed (-> Foreign Key)
+****** User (-> Foreign Key)
+**** Events
+***** Timer
+***** Message
+*** Fortune
+Runs fortune und returns the cookie to the user
+**** Entities
+**** Events
+***** Message
+*** Reminder
+**** Entities
+***** Reminder
+****** Text
+****** DateTime
+****** User (-> Foreign Key)
+**** Events
+***** Message
+To record the message
+***** Timer
+To remind the user.
